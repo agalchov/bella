@@ -6,7 +6,22 @@
     <title>Прости ми Мише</title>
     <link rel="icon" href="title.png" type="image/x-icon" />
     <style>
+        .dot{
+            width:15px;
+            height:15px;
+            opacity: 0.3;
+            position:absolute;
+            background: url(https://image.ibb.co/kyUHab/rose.png);
+            color: #ff4d88;
+            background-size: 100% 100%;
+        }
+
+        #logo{ left:50%; top:50%; position:absolute; border-radius:10px; }
+
         body {
+            background-color: #111;
+            font-family: Signika Negative, Asap, sans-serif;
+            overflow:hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -104,11 +119,12 @@
             color: #ff4d88;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body>
+<body id="container">
     <div class="container">
         <div>
-            <h1>101 Причини Наско да види пак усмивката на Мишето</h1>  
+            <h1>Защо си специална за мен</h1>
         </div> 
         <div>
             <div class="heart"></div>
@@ -131,92 +147,91 @@
         </div>
     </div>
     <script>
-        // Reasons list
-        const reasons = [
-            "Сгреших и съжалявам за това.",
-            "Осъзнавам колко те нараних.",
-            "Ти значиш много за мен.",
-            "Ще направя всичко, за да поправя нещата.",
-            "Животът е по-хубав, когато сме заедно.",
-            "Искам отново да се усмихнеш.",
-            "Наистина съжалявам, че те огорчих.",
-            "Оценявам какво значиш за мен.",
-            "Обещавам да се променя.",
-            "Искам да бъда човекът, който заслужаваш.",
-            "Обещавам да бъда по-добър човек.",
-            "Твоето щастие значи много за мен.",
-            "Ще направя всичко по силите си, за да ти покажа, че съжалявам.",
-            "Не мога да променя миналото, но мога да бъда по-добър.",
-            "Осъзнавам, че ти заслужаваш по-добро отношение.",
-            "Ти си важна за мен и искам да оправя нещата.",
-            "Ще направя всичко, за да ти докажа, че съжалявам.",
-            "Ще направя всичко възможно да ти покажа, че съм променен.",
-            "Грешките ми ме научиха на нещо важно.",
-            "Искам отново да се усмихваме заедно.",
-            "Съжалявам за всичко, което се случи.",
-            "Искам да бъдеш част от живота ми.",
-            "Готов съм да се поуча от грешките си.",
-            "Ще направя всичко, за да възвърна доверието ти.",
-            "Ти си важна за мен и искам да оправя нещата.",
-            "Признавам си, че не постъпих добре.",
-            "Искам да продължим напред заедно.",
-            "Моля те, прости ми, и нека гледаме към бъдещето.",
-            "Обещавам, че ще работя върху себе си.",
-            "Важна си за мен и искам да оправя нещата.",
-            "Ти си скъп човек, и не искам да те загубя.",
-            "Знам, че ти нараних доверието, и съжалявам от сърце за това.",
-            "Лъжата не е в сърцето ми – беше грешка, която никога няма да повторя.",
-            "Ти си най-важният човек в живота ми и ще направя всичко, за да си върна доверието ти.",
-            "Ще бъда по-открит и честен, за да ти покажа, че съм готов да се променя.",
-            "Наясно съм, че трябва да положа усилия, за да ти докажа, че съм достоен за прошка.",
-            "Ще ти дам пространство и време, ако това ще ти помогне да ми простиш.",
-            "Обещавам да изслушвам нуждите и чувствата ти с по-голямо уважение.",
-            "Зная, че прошката е трудно нещо, но съм готов да чакам колкото е нужно.",
-            "Надявам се да ми дадеш шанс да ти покажа, че може да има промяна в мен.",
-            "Осъзнавам колко е важно доверието за една връзка и съжалявам, че го наруших.",
-            "Ти заслужаваш само честност и уважение, и аз се ангажирам да ти ги дам.",
-            "Ще направя всичко възможно, за да ти докажа, че мога да бъда човек, на когото да разчиташ.",,
-            "Сърцето ме боли от мисълта, че те нараних и искам да го поправя.",
-            "Разбирам, че лъжата е предателство и съм готов да преодолеем това заедно.",
-            "Ще положа усилия да бъда по-добър партньор за теб, защото ти го заслужаваш.",
-            "Извинявам се от дъното на душата си и обещавам никога повече да не те нараня по този начин.",
-            "Обещавам да те поставя на първо място и да бъда открит с теб занапред.",
-        ];
-        
-        // Get DOM elements
-        const reasonDisplay = document.getElementById("reasonDisplay");
-        const heart = document.getElementById("heart");
-        const reasonHistory = document.getElementById('reason-history');
-        var oldText = '';
-        var hasClicked = false;
+        const reasons = [    
+                    "Харесвам те с нежност, безкрайна и вечна, ти си моята радост безценна и вечна.",
+                    "Ти си начало и край на всяка моя мечта, ти си любовта, която ще пазя и накрая на света.",
+                    "Ти си моето слънце в мрачен ден, до теб се чувствам спокоен и благословен.",
+                    "С теб всяка дума звучи като песен, любовта ти е моят пристан чудесен.",
+                    "С твоите ръце намирам покой, ти си моят дом, моят вечен зной.",
+                    "С усмивка ми даваш целия свят, ти си моят живот, моята съкровена благодат.",
+                    "С всеки поглед ме караш да летя, ти си магия, която не мога да спра.",
+                    "С всяка прегръдка ме караш да летя, ти си моят живот, моя сладка мечта.",
+                    "С усмивката ти утрото се ражда, дарява нов живот във пепелта, на щастието огъня подклажда, завръща се в душата радостта.",
+                    "С всеки миг до теб сърцето ми тупти, моето щастие и моята мечта си ти."
+                ];
+                
+                // Get DOM elements
+                const reasonDisplay = document.getElementById("reasonDisplay");
+                const heart = document.getElementById("heart");
+                const reasonHistory = document.getElementById('reason-history');
+                var oldText = '';
+                var hasClicked = false;
+                var clickCount = 0;
+            
+                var priorityTexts = [
+                    "Очите ти вселената побират, безброй звезди блестят в тях, само с поглед ме изтръгват от нах-дълбокия и тъмен мрак!",
+                    "Косите ти са северно сияние, обагрило безкраен небосвод, това си ти божествено създание, на теб Мише бих посветил един живот!",
+                    "С усмивката ти изгряват звездите и сияят безброй светлини.С гласа ти притихват вълните и песен вълшебно звъни."
+                ]
 
-        // Spin the heart function
-        function spin() {
-            document.getElementsByClassName('heart')[0].classList.add('heartbeat-animation');
-            setTimeout(function(){
-               
-                var text = "Ще бъда по-открит и честен, за да ти покажа, че съм готов да се променя.";
-                if(hasClicked){
-                    var randomIndex = Math.floor(Math.random() * reasons.length)
-                    text = reasons[randomIndex];
-                }    
+                // Spin the heart function
+                function spin() {
+                    document.getElementsByClassName('heart')[0].classList.add('heartbeat-animation');
+                    setTimeout(function(){
+                    
+                        var text = priorityTexts[clickCount];
+                        
+                        if(clickCount >= priorityTexts.length){
+                            var randomIndex = Math.floor(Math.random() * reasons.length)
+                            text = reasons[randomIndex];
+                            if(reasonDisplay.innerText == text){
+                                randomIndex = Math.floor(Math.random() * reasons.length)
+                                text = reasons[randomIndex];
+                            }
+                        }    
 
-                reasonDisplay.innerText =text;
-               
-                if(!hasClicked){
-                    document.getElementById('click-btn').innerText = 'Натисни Пак'
-                    hasClicked = true;
+                        reasonDisplay.innerText = text;
+                    
+                        if(!hasClicked){
+                            document.getElementById('click-btn').innerText = 'Натисни Пак'
+                            hasClicked = true;
+                        }
+
+                        // if(oldText){
+                        //     const li = document.createElement("li");
+                        //     li.innerText = oldText;
+                        //     reasonHistory.insertBefore(li, reasonHistory.firstChild);
+                        // }
+                        // oldText = reasonDisplay.innerText;
+                        document.getElementsByClassName('heart')[0].classList.remove('heartbeat-animation');
+                        clickCount = clickCount + 1;
+                    }, 2000)
                 }
 
-                // if(oldText){
-                //     const li = document.createElement("li");
-                //     li.innerText = oldText;
-                //     reasonHistory.insertBefore(li, reasonHistory.firstChild);
-                // }
-                // oldText = reasonDisplay.innerText;
-                document.getElementsByClassName('heart')[0].classList.remove('heartbeat-animation');
-            }, 2000)
-        }
+                /*
+                a Pen by DIACO : twitter.com/Diaco_ml  ||  codepen.io/MAW
+                powered by GSAP : https://www.greensock.com/
+                */
+                TweenLite.set("#container",{perspective:600})
+                TweenLite.set("img",{xPercent:"-50%",yPercent:"-50%"})
+
+                var total = 30;
+                var warp = document.getElementById("container"),w = window.innerWidth , h = window.innerHeight;
+                
+                for (i=0; i<total; i++){ 
+                    var Div = document.createElement('div');
+                    TweenLite.set(Div,{attr:{class:'dot'},x:R(0,w),y:R(-200,-150),z:R(-200,200)});
+                    warp.appendChild(Div);
+                    animm(Div);
+                }
+                
+                    function animm(elm){   
+                        TweenMax.to(elm,R(6,15),{y:h+100,ease:Linear.easeNone,repeat:-1,delay:-15});
+                        TweenMax.to(elm,R(4,8),{x:'+=100',rotationZ:R(0,180),repeat:-1,yoyo:true,ease:Sine.easeInOut});
+                        TweenMax.to(elm,R(2,8),{rotationX:R(0,360),rotationY:R(0,360),repeat:-1,yoyo:true,ease:Sine.easeInOut,delay:-5});
+                    };
+
+                function R(min,max) {return min+Math.random()*(max-min)};
     </script>
 </body>
 </html>
