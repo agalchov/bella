@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прости ми Мише</title>
+    <link rel="icon" href="title.png" type="image/x-icon" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e9;
+            background-image: url('bg.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+
+
+.heart {
+    left: 38%;
+    height: 100px;
+    width: 100px;
+    background-color: #ff4d88;
+    transform: rotate(-45deg);
+    position: relative;
+
+}
+.heartbeat-animation {
+    animation: heartbeat 1s infinite;
+}
+
+.heart::before, 
+.heart::after {
+    content: "";
+    height: 100px;
+    width: 100px;
+    background-color: #ff4d88;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -50px;
+    left: 0px;
+}
+
+.heart::after {
+    left: 50px;
+    top: 0px;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1)
+            rotate(-45deg);
+    }
+
+    25% {
+        transform: scale(1.25)
+            rotate(-45deg);
+    }
+
+    45% {
+        transform: scale(1.5)
+            rotate(-45deg);
+    }
+}
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #ff4d88;
+            font-size: 2em;
+            margin-bottom: 100px;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #ff4d88;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 80px;
+        }
+
+        button:hover {
+            background-color: #ff6680;
+        }
+
+        #reasonDisplay {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #ff4d88;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>101 Причини да ми простиш</h1>  
+        </div> 
+        <div>
+            <div class="heart"></div>
+        </div>
+        <div>
+            <button onclick="spin()">Натисни</button>
+        </div>
+        <p id="reasonDisplay"></p>
+
+        <!-- <ol style="position: absolute;
+        left: 0;
+        top: 80%;
+        opacity: 0.5;
+        text-align: left;
+        margin: 10px;
+        color: #ff4d88;
+        height: 150px;
+        overflow: scroll;" id="reason-history"> -->
+
+        </div>
+    </div>
+    <script>
+        // Reasons list
+        const reasons = [
+            "Сгреших и съжалявам за това.",
+            "Не исках да те нараня.",
+            "Не бях прав в тази ситуация.",
+            "Грешката ми беше неволна.",
+            "Не се държах добре с теб.",
+            "Осъзнавам колко те нараних.",
+            "Ти значиш много за мен.",
+            "Наистина съжалявам.",
+            "Можем да преодолеем това заедно.",
+            "Не оцених правилно ситуацията.",
+            "Бях неразумен.",
+            "Обичам те и не искам да те загубя.",
+            "Осъзнах грешката си твърде късно.",
+            "Не исках да те карам да се чувстваш така.",
+            "Обещавам да не повтарям тази грешка.",
+            "Случилото се ме кара да се срамувам.",
+            "Моля те, дай ми още един шанс.",
+            "Ще направя всичко, за да поправя нещата.",
+            "Не знам какво ми стана.",
+            "Знам, че грешките ми те нараняват.",
+            "Знам, че можех да постъпя по-добре.",
+            "Извинявам се за моята импулсивност.",
+            "Оценявам времето и търпението ти.",
+            "Моля те, прости ми, и да продължим напред.",
+            "Нека започнем на чисто.",
+            "Съзнавам, че не постъпих правилно.",
+            "Животът е по-хубав, когато сме заедно.",
+            "Искам отново да се усмихнеш.",
+            "Обещавам, че ще бъда по-внимателен.",
+            "Наистина съжалявам, че те огорчих.",
+            "Нека не позволяваме тази грешка да ни раздели.",
+            "Моля те, дай ми шанс да се поправя.",
+            "Оценявам какво значиш за мен.",
+            "Обещавам да се променя.",
+            "Искам да бъда човекът, който заслужаваш.",
+            "Не мога да се справя без теб.",
+            "Ти си важен за мен.",
+            "Имаме твърде много добри моменти, за да си позволим това.",
+            "Аз съм този, който сбърка.",
+            "Обещавам да бъда по-добър човек.",
+            "Твоето мнение има значение за мен.",
+            "Знам, че трябва да поема отговорност.",
+            "Боли ме да знам, че съм те наранил.",
+            "Наистина искам да направя нещата по-добре.",
+            "Осъзнавам, че ти имаш право да се чувстваш така.",
+            "Не искам да бъда причина за твоето страдание.",
+            "Животът е твърде кратък, за да се караме.",
+            "Твоето щастие значи много за мен.",
+            "Осъзнах грешката си твърде късно.",
+            "Ще направя всичко по силите си, за да ти покажа, че съжалявам.",
+            "Извинявай за всичко, което съм причинил.",
+            "Не искам да губя доверието ти.",
+            "Не мога да променя миналото, но мога да бъда по-добър.",
+            "Осъзнавам, че ти заслужаваш по-добро отношение.",
+            "Ти си важна за мен и искам да оправя нещата.",
+            "Ще направя всичко, за да ти докажа, че съжалявам.",
+            "Извинявай, че те натоварих.",
+            "Ще направя всичко възможно да ти покажа, че съм променен.",
+            "Грешките ми ме научиха на нещо важно.",
+            "Мога да бъда по-добър за теб.",
+            "Прости ми и нека оставим това зад нас.",
+            "Искам отново да се усмихваме заедно.",
+            "Съжалявам за всичко, което се случи.",
+            "Искам да бъда част от живота ми.",
+            "Готов съм да се поуча от грешките си.",
+            "Извинявам се за моята небрежност.",
+            "Ще направя всичко, за да възвърна доверието ти.",
+            "Ти си важна за мен и искам да оправя нещата.",
+            "Искам да видя усмивката ти отново.",
+            "Съжалявам, че наруших нашето доверие.",
+            "Твоята прошка би ми помогнала да се почувствам по-добре.",
+            "Признавам си, че не постъпих добре.",
+            "Съжалявам, че те разочаровах.",
+            "Искам да продължим напред заедно.",
+            "Моля те, прости ми, и нека гледаме към бъдещето.",
+            "Обещавам, че ще работя върху себе си.",
+            "Важна си за мен и искам да оправя нещата.",
+            "Съжалявам за всичко, което съм причинил.",
+            "Прости ми, за да можем да продължим напред.",
+            "Ти си скъп човек, и не искам да те загубя.",
+        ];
+        
+        // Get DOM elements
+        const reasonDisplay = document.getElementById("reasonDisplay");
+        const heart = document.getElementById("heart");
+        const reasonHistory = document.getElementById('reason-history');
+        var oldText = '';
+
+        // Spin the heart function
+        function spin() {
+            document.getElementsByClassName('heart')[0].classList.add('heartbeat-animation');
+            setTimeout(function(){
+               
+                const randomIndex = Math.floor(Math.random() * reasons.length);
+                reasonDisplay.innerText = reasons[randomIndex];
+               
+                // if(oldText){
+                //     const li = document.createElement("li");
+                //     li.innerText = oldText;
+                //     reasonHistory.insertBefore(li, reasonHistory.firstChild);
+                // }
+                // oldText = reasonDisplay.innerText;
+                document.getElementsByClassName('heart')[0].classList.remove('heartbeat-animation');
+            }, 2000)
+        }
+    </script>
+</body>
+</html>
